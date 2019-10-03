@@ -1,43 +1,49 @@
 module.exports = function zeros(expression) {
 
-
-
-let a = expression.split("*");
-let nul = 0
-for (let ind = 0; ind <= a; ind++){
-  let num = parseInt(a[ind])
-
-let mul = 1;
-for (let i = 1; i <= num; i++){
-mul *= i; 
-}
-let z;
-let nul = 0;
-let b;
-for (z = 1; z <= mul; z++){
-  if ((z % 5 == 0) & (z % 2 == 0)){
-    mul = mul/10;
-    nul++;
+  let a = expression.split("*");
+  let count;  // считает кол-во !
+  let num; // с помощью него мы проходим по факториалу!!!!
+  let num_2 = 0;
+  let num_5 = 0;
+  let result;
+  for(let x = 0; x < a.length; x++){
+  count = a[x].split("!").length - 1;
+    if (count == 1){                        // если один !
+        num = parseInt(a[x]);
+        for( let z = 1; z <= num; z++){
+          if (z % 2 == 0) num_2++;
+          if (z % 5 == 0) num_5++;
+        }
+    } else if (count == 2) {
+        num = parseInt(a[x]); //факториал,с которым производится операция
+        if (num % 2 == 0){
+          for( let z = 2; z <= num; z +=2){
+          if (z % 2 == 0) num_2++;
+          if (z % 5 == 0) num_5++;
+          }
+          } else {
+            for ( let y = 1; y <= num; y += 2){
+              if ( y % 5 == 0) num_5++;
+            }
+        }
+      }
+    
   }
-}
-}
-return nul;
-
-// let a = expression.split("*");
-// let num = parseInt(a[0]);
-// let mul = 1;
-// for (let i = 1; i <= num; i++){
-// mul *= i; 
-// }
-// let z;
-// let nul = 0;
-// let b;
-// for (z = 1; z <= mul; z++){
-//   if ((z % 5 == 0) & (z % 2 == 0)){
-//     mul = mul/10;
-//     nul++;
-//   }
-// }
-// }
-// return nul;
+  result = (num_2 > num_5) ? num_5 : num_2;
+return result;
+  // let a = expression.split("*");
+  // let count = expression.split("!").length - 1;
+  // if()
+  // let num;
+  // let num_2 = 0;
+  // let num_5 = 0;
+  // for (let i = 0; i < a.length; i++){
+  //   num = parseInt(a[i]);
+  //   for( let z = 1; z <= num; z++){
+  //     if (z % 2 == 0) num_2++;
+  //     if (z % 5 == 0) num_5++;
+  //   }
+  // }
+  // let result = (num_2 > num_5) ? num_5 : num_2;
+  // return result;
 }
